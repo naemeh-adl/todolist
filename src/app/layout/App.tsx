@@ -6,7 +6,7 @@ import { ToDoDashboard } from "../../features/activities/dashboard/ToDoDashboard
 import axios from "axios";
 import ModalVideo from "react-modal-video";
 
-////////////////////////////////////////
+////////////////////////////////////////APARAT
 // const Aparat=()=>{
 //   debugger;
 //   axios({
@@ -18,10 +18,10 @@ import ModalVideo from "react-modal-video";
 //       "Access-Control-Allow-Origin": "http://api.aparat.com"
 //     },
 //   }).then(function (response) {
-    
+
 //       console.log("sucess!!");
 //     debugger;
-     
+
 //   });
 // }
 // var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
@@ -65,7 +65,6 @@ import ModalVideo from "react-modal-video";
 //   }
 
 //////////////////////////////////////////////
-
 const App = () => {
   const [ToDoes, setToDoes] = useState<IToDo[]>([]);
   const [SelectedTodo, SetSelectedTodo] = useState<IToDo | null>(null);
@@ -74,8 +73,7 @@ const App = () => {
   const [isOpen, setOpeni] = useState(false);
   useEffect(() => {
     // localStorage.clear();
-    //Aparat();
-    let data = JSON.parse(String(localStorage.getItem("Activities")));
+    let data = JSON.parse(String(localStorage.getItem("TODoes")));
     let mytodoes: IToDo[] = [];
     if (data !== null) {
       data.forEach((x: any) => {
@@ -84,6 +82,7 @@ const App = () => {
       setToDoes(mytodoes);
     }
   }, []);
+  ///////////Handlers
   const HandleSelectedToDo = (Id: string) => {
     SetSelectedTodo(ToDoes.filter((x) => x.id === Id)[0]);
     SetEditMode(false);
@@ -92,9 +91,27 @@ const App = () => {
     SetSelectedTodo(null);
     SetEditMode(true);
   };
+  const HandleEditTodo = (activity: IToDo) => {
+    localStorage.removeItem("TODoes");
+    localStorage.setItem(
+      "TODoes",
+      JSON.stringify([...ToDoes.filter((x) => x.id !== activity.id), activity])
+    );
+    setToDoes([...ToDoes.filter((x) => x.id !== activity.id), activity]);
+    SetSelectedTodo(activity);
+    SetEditMode(false);
+  };
+  const HandleDeleteToDo = (Id: string) => {
+    localStorage.removeItem("TODoes");
+    localStorage.setItem(
+      "TODoes",
+      JSON.stringify([...ToDoes.filter((x) => x.id !== Id)])
+    );
+    setToDoes([...ToDoes.filter((x) => x.id !== Id)]);
+  };
   const HandleCreateToDo = (activity: IToDo) => {
-    localStorage.removeItem("Activities");
-    localStorage.setItem("Activities", JSON.stringify([...ToDoes, activity]));
+    localStorage.removeItem("TODoes");
+    localStorage.setItem("TODoes", JSON.stringify([...ToDoes, activity]));
     setToDoes([...ToDoes, activity]);
     SetSelectedTodo(activity);
     SetEditMode(false);
@@ -106,7 +123,6 @@ const App = () => {
         : Number(localStorage.getItem("count"));
     localStorage.setItem("count", String(stored_value + 1));
     if ((stored_value + 1) % 5 === 0) {
-      debugger;
       onOpenModal();
       axios({
         method: "GET",
@@ -120,33 +136,12 @@ const App = () => {
           (x) => x.snippet.channelTitle !== "NFL"
         )[0];
         try {
-          debugger;
           setVideoId(SelecteVideo.id.videoId);
-          console.log("sucess!!");
         } catch {
-          debugger;
           setVideoId("_6r_1esxE64");
         }
       });
     }
-  };
-  const HandleEditTodo = (activity: IToDo) => {
-    localStorage.removeItem("Activities");
-    localStorage.setItem(
-      "Activities",
-      JSON.stringify([...ToDoes.filter((x) => x.id !== activity.id), activity])
-    );
-    setToDoes([...ToDoes.filter((x) => x.id !== activity.id), activity]);
-    SetSelectedTodo(activity);
-    SetEditMode(false);
-  };
-  const HandleDeleteToDo = (Id: string) => {
-    localStorage.removeItem("Activities");
-    localStorage.setItem(
-      "Activities",
-      JSON.stringify([...ToDoes.filter((x) => x.id !== Id)])
-    );
-    setToDoes([...ToDoes.filter((x) => x.id !== Id)]);
   };
   const onOpenModal = () => {
     setOpeni(true);
