@@ -7,23 +7,23 @@ import axios from "axios";
 import ModalVideo from "react-modal-video";
 
 ////////////////////////////////////////
-const Aparat=()=>{
-  debugger;
-  axios({
-    method:'GET',
-    url:'‏http://api.aparat.com/fa/v1/video/video/mostViewedVideos',
-    headers: {
-      "content-type": "application/json",
-      'x-rapidapi-key':"preview_src",
-      "Access-Control-Allow-Origin": "http://api.aparat.com"
-    },
-  }).then(function (response) {
+// const Aparat=()=>{
+//   debugger;
+//   axios({
+//     method:'GET',
+//     url:'‏http://api.aparat.com/fa/v1/video/video/mostViewedVideos',
+//     headers: {
+//       "content-type": "application/json",
+//       'x-rapidapi-key':"preview_src",
+//       "Access-Control-Allow-Origin": "http://api.aparat.com"
+//     },
+//   }).then(function (response) {
     
-      console.log("sucess!!");
-    debugger;
+//       console.log("sucess!!");
+//     debugger;
      
-  });
-}
+//   });
+// }
 // var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 //   function doCORSRequest(options:any, printResult:any) {
 //     var x = new XMLHttpRequest();
