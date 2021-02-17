@@ -1,0 +1,20 @@
+.container{
+    display: grid;
+    grid-template-columns: 1fr ;
+    /* grid-template-rows: 40% 60% ; */
+     align-items: flex-start; 
+    /* justify-items: center; */
+   /* height: fit-content;
+    width: fit-content;
+    padding: 10px; */
+    margin: auto;
+    margin-top: 0;
+}
+.ItemStyle{
+   font-weight: bolder;
+   color: teal;
+   }
+   .MainBox{
+    margin-bottom: 5px;
+    box-shadow:2px 2px silver;
+    }
