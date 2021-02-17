@@ -53,6 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ],
-    "homepage": "https://naemeh-adl.github.io/todolist"
+    "homepage": "https://naemeh-adl.github.io/todolist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
